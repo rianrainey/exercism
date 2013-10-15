@@ -22,11 +22,11 @@ class Statement < String
   end
 
   def yelling?
-    self === self.upcase && self.contains_words?
+    self == self.upcase && self.contains_words?
   end
 
   def silence?
-    self.strip.length === 0
+    self.strip.length == 0
   end
 
   private_class_method

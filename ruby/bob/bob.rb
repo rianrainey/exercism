@@ -17,9 +17,6 @@ class Bob
 end
 
 class Statement < String
-  def new value
-  end
-
   def question?
     self[-1] === "?"
   end

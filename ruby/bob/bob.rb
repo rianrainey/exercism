@@ -4,11 +4,11 @@ class Bob
     statement = Statement.new(command)
 
     case
-    when statement.yelling? && statement.contains_words?
+    when statement.yelling?
       "Woah, chill out!" 
     when statement.question?
       "Sure."
-    when statement.blank?
+    when statement.silence?
       "Fine. Be that way!"
     else
       "Whatever."
@@ -22,14 +22,15 @@ class Statement < String
   end
 
   def yelling?
-    self === self.upcase 
+    self === self.upcase && self.contains_words?
   end
 
+  def silence?
+    self.strip.length === 0
+  end
+
+  private_class_method
   def contains_words?
     /([a-zA-Z]+\s*[a-zA-Z]*)+\w/ =~ self
-  end
-
-  def blank?
-    self.strip.length === 0
   end
 end

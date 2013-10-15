@@ -18,7 +18,7 @@ end
 
 class Statement < String
   def question?
-    self[-1] === "?"
+    self.end_with? "?"
   end
 
   def yelling?
@@ -31,6 +31,6 @@ class Statement < String
 
   private_class_method
   def contains_words?
-    /([a-zA-Z]+\s*[a-zA-Z]*)+\w/ =~ self
+    /[a-zA-Z]/ =~ self
   end
 end

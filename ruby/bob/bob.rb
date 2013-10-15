@@ -1,5 +1,5 @@
 class Bob
-  def new
+  def initialize
   end
 
   def hey command

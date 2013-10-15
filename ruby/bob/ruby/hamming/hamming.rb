@@ -1,5 +1,3 @@
-# put distance+=1 on 1 line
-#
 class Hamming
 
   def self.compute strand1, strand2

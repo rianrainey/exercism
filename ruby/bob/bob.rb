@@ -1,6 +1,4 @@
 class Bob
-  def initialize
-  end
 
   def hey command
     statement = Statement.new(command)

@@ -4,18 +4,20 @@ class Phrase
   end
 
   def word_count
-    word_count_hash = Hash.new
-    #binding.pry
-    #
-    @phrase.downcase.split(/[^\w+']/).delete_if(&:empty?).each do |word|
-      if word_count_hash.key?(word)
-        word_count_hash[word] = word_count_hash[word] + 1
+    count_of_words = Hash.new
+    words = get_words(@phrase)
+    words.each do |word|
+      if count_of_words.key?(word)
+        count_of_words[word] = count_of_words[word] + 1
       else
-        word_count_hash[word] = 1 
+        count_of_words[word] = 1 
       end
     end
-    word_count_hash
+    count_of_words
   end
 
+  def get_words(phrase)
+    phrase.downcase.split(/[^\w+']/).delete_if(&:empty?)
+  end
 
 end

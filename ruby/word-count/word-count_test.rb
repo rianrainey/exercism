@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require_relative 'phrase'
-require 'pry'
 
 class PhraseTest < MiniTest::Unit::TestCase
 

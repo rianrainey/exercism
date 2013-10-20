@@ -2,13 +2,13 @@ class Hamming
 
   def self.compute strand1, strand2
 
-    chars1 = strand1.chars
-    chars2 = strand2.chars
+    nucleotides1 = strand1.chars
+    nucleotides2 = strand2.chars
 
-    paired_array = chars1.zip(chars2)
+    paired_nucleotides = nucleotides1.zip(nucleotides2)
 
-    paired_array.count do |first, second|
-      first && first != second
+    paired_nucleotides.count do |first, second|
+      first && second && first != second
     end
 
   end

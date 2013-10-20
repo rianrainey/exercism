@@ -1,23 +1,16 @@
 class Hamming
 
   def self.compute strand1, strand2
-    distance = 0
 
-    strand1_array = strand1.split('')
-    strand2_array = strand2.split('')
+    chars1 = strand1.chars
+    chars2 = strand2.chars
 
-    strand1_array.each_with_index do |point1, index|
-      point2 = strand2_array[index]
+    paired_array = chars1.zip(chars2)
 
-      distance+=1 if point_mutation?(point1, point2)
+    paired_array.count do |first, second|
+      first && first != second
     end
 
-    distance
   end
-
-  def self.point_mutation? pointa, pointb
-    pointa != pointb && !pointa.nil? && !pointb.nil?
-  end
-  private_class_method :point_mutation?
 
 end

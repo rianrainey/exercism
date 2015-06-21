@@ -8,12 +8,29 @@ defmodule ListOps do
 
   @spec count(list) :: non_neg_integer
   def count(l) do
+    #Enum.reduce(l, 0, fn(x, acc) -> x + acc end)
+    count_items(l)
+  end
 
+  defp count_items([]) do
+    0
+  end
+
+  defp count_items([head|tail]) do
+    1 + count_items(tail)
   end
 
   @spec reverse(list) :: list
   def reverse(l) do
+    reverse_head_and_tail(l, [])
+  end
 
+  def reverse_head_and_tail([], acc) do
+    acc
+  end
+
+  def reverse_head_and_tail([head | tail], acc) do
+    reverse_head_and_tail(tail, [head | acc])
   end
 
   @spec map(list, (any -> any)) :: list

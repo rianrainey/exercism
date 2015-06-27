@@ -7,40 +7,26 @@ defmodule ListOps do
   # automatically imported) and so shouldn't be used either.
 
   @spec count(list) :: non_neg_integer
-  def count(l) do
-    #Enum.reduce(l, 0, fn(x, acc) -> x + acc end)
-    count_items(l)
-  end
-
-  defp count_items([]) do
-    0
-  end
-
-  defp count_items([head|tail]) do
-    1 + count_items(tail)
-  end
+  def count([]), do: 0
+  def count([_ | tail]), do: 1 + count(tail)
 
   @spec reverse(list) :: list
-  def reverse(l) do
-    reverse_head_and_tail(l, [])
-  end
-
-  def reverse_head_and_tail([], acc) do
-    acc
-  end
-
-  def reverse_head_and_tail([head | tail], acc) do
-    reverse_head_and_tail(tail, [head | acc])
-  end
+  defp my_reverse([], acc), do: acc
+  defp my_reverse([head | tail], acc), do: my_reverse(tail, [head | acc])
+  def reverse(l), do: my_reverse(l, [])
 
   @spec map(list, (any -> any)) :: list
-  def map(l, f) do
-
-  end
+  def map([], _), do: []
+  def map([head | tail], f), do: [f.(head) | map(tail, f)]
 
   @spec filter(list, (any -> as_boolean(term))) :: list
-  def filter(l, f) do
-
+  def filter([], _), do: []
+  def filter([head | tail], f) do
+    if f.(head) do
+      [head | filter(tail, f)]
+    else
+      filter(tail, f)
+    end
   end
 
   @type acc :: any

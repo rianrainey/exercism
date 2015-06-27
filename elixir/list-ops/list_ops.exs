@@ -38,12 +38,13 @@ defmodule ListOps do
   def reduce(l, acc, f), do: my_reduce(l, acc, f)
 
   @spec append(list, list) :: list
-  def append(a, b) do
-
-  end
+  defp my_append([], []), do: []
+  defp my_append(a, []), do: a
+  defp my_append([], b), do: b
+  defp my_append(a, b), do: a++b
+  def append(a, b), do: my_append(a,b)
 
   @spec concat([[any]]) :: [any]
-  def concat(ll) do
-
-  end
+  def concat([]), do: []
+  def concat([head | tail]), do: head ++ concat(tail)
 end

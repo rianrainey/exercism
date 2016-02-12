@@ -6,10 +6,13 @@ defmodule Sublist do
   def compare([], []), do: :equal
   def compare([], _),  do: :sublist
   def compare(_, []),  do: :superlist
-  def compare( [ a | a_tail ], [ b | b_tail ]) do
+  def compare( [ a | [] ], [ b | [] ]) do
     cond do
-      a != b -> :unequal
-      a == b -> :equal
+      a === b -> :equal
+      a !== b -> :unequal
     end
+  end
+  def compare( [ _ | a_tail ], [ _ | b_tail ]) do
+    compare(a_tail, b_tail)
   end
 end

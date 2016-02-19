@@ -5,6 +5,7 @@ else
 end
 
 ExUnit.start
+ExUnit.configure exclude: :pending, trace: true
 
 defmodule SublistTest do
   use ExUnit.Case, async: true
@@ -25,6 +26,7 @@ defmodule SublistTest do
     assert Sublist.compare([1], [2]) == :unequal
   end
 
+  @tag :pending
   test "1,2 is not 2,3" do
     assert Sublist.compare([1, 2], [2, 3]) == :unequal
   end
@@ -52,6 +54,12 @@ defmodule SublistTest do
 
   test "sublist early in huge list" do
     assert Sublist.compare([3,4,5], Enum.to_list(1..1_000_000)) == :sublist
+  end
+
+  test "small sublist not in small list" do
+    assert Sublist.compare(Enum.to_list(2..4),
+                           Enum.to_list(1..3))
+           == :unequal
   end
 
   test "huge sublist not in huge list" do
@@ -84,11 +92,12 @@ defmodule SublistTest do
     assert Sublist.compare([1], [1.0, 2]) == :unequal
   end
 
-  #test "recurring values sublist" do
-    #assert Sublist.compare([1,2,1,2,3], [1,2,3,1,2,1,2,3,2,1]) == :sublist
-  #end
+  test "recurring values sublist" do
+    assert Sublist.compare([1,2,1,2,3], [1,2,3,1,2,1,2,3,2,1]) == :sublist
+  end
 
-  #test "recurring values unequal" do
-    #assert Sublist.compare([1,2,1,2,3], [1,2,3,1,2,3,2,3,2,1]) == :unequal
-  #end
+  @tag :pending
+  test "recurring values unequal" do
+    assert Sublist.compare([1,2,1,2,3], [1,2,3,1,2,3,2,3,2,1]) == :unequal
+  end
 end

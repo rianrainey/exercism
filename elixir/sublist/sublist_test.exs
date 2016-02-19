@@ -26,7 +26,6 @@ defmodule SublistTest do
     assert Sublist.compare([1], [2]) == :unequal
   end
 
-  @tag :pending
   test "1,2 is not 2,3" do
     assert Sublist.compare([1, 2], [2, 3]) == :unequal
   end
@@ -96,7 +95,6 @@ defmodule SublistTest do
     assert Sublist.compare([1,2,1,2,3], [1,2,3,1,2,1,2,3,2,1]) == :sublist
   end
 
-  @tag :pending
   test "recurring values unequal" do
     assert Sublist.compare([1,2,1,2,3], [1,2,3,1,2,3,2,3,2,1]) == :unequal
   end

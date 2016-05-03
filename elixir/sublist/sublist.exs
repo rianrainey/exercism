@@ -19,28 +19,13 @@ defmodule Sublist do
       { a, b } when length(b) > length(a) ->
         case compare(a, tl(b)) do
           :equal     -> :sublist
-          :sublist   -> :sublist
+          :sublist when hd(a) == hd(tl(b)) -> :sublist
+          :sublist                         -> :unequal
           :unequal   -> :unequal
-          #:superlist -> compare(a, btail)
-          #:unequal   -> :unequal
         end
       { a, b } when length(b) == length(a) -> :unequal
     end
   end
-  #def compare([], []), do: :equal
-  #def compare([], b) when is_list(b),  do: :sublist
-  #def compare(a, []) when is_list(a),  do: :superlist
-  ##def compare(a, b) when a === b, do: :equal
-  #def compare( [ a | a_tail ], [ b | b_tail ]) do
-    #cond do
-      ##a === b -> :equal
-      #a !== b -> _sub_compare(a_tail, b_tail)
-    #end
-  #end
-  #defp _sub_compare(a, b) do
-    #cond do
-      #a !== b -> :unequal
-    #end
-  #end
-  #defp _sublist?(a, b), do: sublist
+
+  # TODO: Define sublist and superlist methods
 end

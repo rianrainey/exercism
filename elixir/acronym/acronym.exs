@@ -7,27 +7,23 @@ defmodule Acronym do
   def abbreviate(string) do
     string
     |> strip_non_characters
-    |> String.split(" ")
+    |> separate_on_uppercase
+    |> String.split(" ", trim: true)
     |> first_letter_of_each_word
-    |> remove_empty
     |> upcase_each
     |> Enum.join
-    |> String.upcase
   end
 
-  defp remove_empty(list) do
-    Enum.filter(list, fn(x) -> x != nil end)
+  defp separate_on_uppercase(input) do
+    String.replace(input, ~r/([A-Z])/, " \\1")
   end
 
   defp upcase_each(list) do
-    IO.puts "list: #{list}"
     Enum.map(list, fn(c) -> String.upcase(c) end)
   end
 
   defp strip_non_characters(input) do
-    result = String.replace(input, ~r/\W/, " ")
-    #IO.puts "strip non chars: #{result}"
-    result
+    String.replace(input, ~r/\W/, " ")
   end
 
   defp first_letter_of_each_word(words) do
